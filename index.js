@@ -30,14 +30,10 @@ _.forEach(Array.from(year.by('months')), month => {
                 date = chalk.bgBlue(date);
             }//my birthday                
             return _.padEnd(date, 2)  
-    })        
-
-    //console.log(paddedDays)
-
+    })       
     //TODO: create a for() loop that loops through month.day()
 
-    for ( var i = month.day(); i>0; i--) {
-                       
+    for ( var i = month.day(); i>0; i--) {                       
         //TODO: Append blank spaces (using paddedDays.unshift('  ')) so that the 1st ends up under the right day column 
         
         paddedDays.unshift('  ');   
@@ -48,10 +44,8 @@ _.forEach(Array.from(year.by('months')), month => {
             paddedDays.forEach(week => { //[ , , , 01, 02]            
                 // TODO: Join the days together to form one string representing the week
                 // TODO: console.log it use week.join('  ')
-                console.log(week.join('  '))
-                
-            })        
-            
+                console.log(week.join('  '))                
+            })                    
         console.log('') // Puts a blank line between each month 
     })
     
