@@ -1,0 +1,59 @@
+const M = require('moment')
+const _ = require('lodash')
+const chalk = require('chalk')
+const MomentRange = require('moment-range')
+
+const moment = MomentRange.extendMoment(M)
+//Will create the year
+let year = moment().range('year')
+//For each month of the year, print the days
+_.forEach(Array.from(year.by('months')), month => {
+    //prints the days of week
+    console.log(_.pad(month.format('MMMM'), 26, ' - '))
+    console.log('S   M   T   W   Th  F   S   ')
+
+    let monthRange = month.range('month')
+    let firstDay = monthRange.start.day()
+    //console.log(firstDay)
+    //Create an array of  days in the month - use Array.from(monthRange.by('days'))
+    let days= Array.from(monthRange.by('days'));
+    // Then, we'll perform several operations on this array of days
+   
+    let paddedDays = _.map(days, day => { // Transforms items in the array        
+        let date = day.format('DD'); // TODO: Change this to output a two-digit date use day.format()            
+            // TODO: Highlight September 10th in color         
+            // TODO: Highlight YOUR birthday in color!
+            if(day.month() == 9 && day.date() == 10) {
+                date = chalk.bgRed(date);
+            }//Kirsten's birthday
+            if(day.month() == 4 && day.date() == 11) {
+                date = chalk.bgBlue(date);
+            }//my birthday                
+            return _.padEnd(date, 2)  
+    })        
+
+    //console.log(paddedDays)
+
+    //TODO: create a for() loop that loops through month.day()
+
+    for ( var i = month.day(); i>0; i--) {
+                       
+        //TODO: Append blank spaces (using paddedDays.unshift('  ')) so that the 1st ends up under the right day column 
+        
+        paddedDays.unshift('  ');   
+    }      
+
+            paddedDays = _.chunk(paddedDays, 7) // Changes the array of days to be an array of weeks, each week containing 7 items from the days array [["  ","  ","  ",01,02,03,04],[05,06...]]               
+            
+            paddedDays.forEach(week => { //[ , , , 01, 02]            
+                // TODO: Join the days together to form one string representing the week
+                // TODO: console.log it use week.join('  ')
+                console.log(week.join('  '))
+                
+            })        
+            
+        console.log('') // Puts a blank line between each month 
+    })
+    
+
+    
